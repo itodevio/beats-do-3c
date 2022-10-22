@@ -18,7 +18,10 @@ export const play = {
       player.join(bot, channel);
 
       if (!playing) {
+        msg.channel.send(`Se liga nesse beat cuzão: ${video.videoDetails.title}`)
         while (await player.stream());
+        msg.channel.send(`To marchando família, cabo as track`)
+        player.connection?.disconnect();
       }
     } catch (err) {
       console.error(err);

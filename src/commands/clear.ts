@@ -14,7 +14,6 @@ export const clear = {
       
       const player = Player.getPlayer(msg.guild, bot);
       player.dispatcher?.stop();
-      
       await player.clear();
 
       await msg.channel.send('Vizão')

@@ -1,4 +1,4 @@
-//import 'dotenv/config';
+import 'dotenv/config';
 import { Client, GatewayIntentBits } from 'discord.js';
 import { Bot, onBotReady, onMessage } from './utils';
 import redis from './config/redis';

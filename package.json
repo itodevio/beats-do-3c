@@ -4,7 +4,10 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "build": "rm-rf ./dist/ && tsc --build",
+    "build:windows": "tsc --build",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@discordjs/voice": "^0.13.0",

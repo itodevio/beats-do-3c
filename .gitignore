@@ -1,5 +1,4 @@
 .env
-
 youtube_secret.json
-
 node_modules/
+dist/

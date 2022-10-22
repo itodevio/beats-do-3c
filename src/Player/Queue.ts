@@ -85,4 +85,11 @@ export default class Queue {
 
 		return result;
 	};
+
+	list = async () => {
+		const redisLength = await this.length()
+		const result = await redis.lRange(this.queueId, 1, redisLength);
+
+		return result;
+	}
 }

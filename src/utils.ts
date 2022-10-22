@@ -13,7 +13,7 @@ export const onBotReady = (bot: Bot) => {
 }
 
 export const onMessage = (bot: Bot, msg: Message) => {
-  if (!msg.content.startsWith('!')) return;
+  if (!msg.content.trim().startsWith('!')) return;
 
   const command = new CommandProcessor(msg);
   

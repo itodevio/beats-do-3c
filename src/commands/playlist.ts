@@ -3,7 +3,7 @@ import Player from '../Player';
 import { Bot, getVideoDetails } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
-export const list = {
+export const playlist = {
   description: '!list -> retorna a listagem de músicas na queue',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {

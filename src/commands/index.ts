@@ -2,7 +2,9 @@ import { Message } from 'discord.js';
 import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 import { play } from './play';
-import { list } from './list';
+import { playlist } from './playlist';
+import { clear } from './clear';
+import { skip } from './skip';
 
 interface Command {
   [key: string]: {
@@ -14,5 +16,12 @@ interface Command {
 export default {
   play,
   p: play,
-  list,
+  playlist,
+  pl: playlist,
+  list: playlist,
+  l: playlist,
+  clear,
+  c: clear,
+  skip,
+  s: skip,
 } as Command;

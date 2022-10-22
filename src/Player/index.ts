@@ -52,6 +52,7 @@ export default class Player extends Queue {
 				const { queue } = await this.get(1, 1);
 				const item = queue[0];
 
+
 				if (!item) {
 					resolve(false);
 					return;
@@ -59,20 +60,26 @@ export default class Player extends Queue {
 
 				if (!this.connection) throw TypeError('No connection could be found!');
 
-				this.bitstream = await ytdl(item);
+				this.bitstream = await ytdl(item, {
+          filter: 'audioonly',
+          highWaterMark: 1 << 25
+        });
         this.dispatcher = createAudioPlayer();
 
         const resource = createAudioResource(this.bitstream);
 
         this.dispatcher.play(resource);
         this.connection.subscribe(this.dispatcher);
-        
+
 				this.dispatcher.on(AudioPlayerStatus.Idle, async () => {
+          this.dispatcher?.stop();
 					await this.shift();
 					resolve(true);
 				});
 
-        this.dispatcher.on('error', err => console.log(err))
+        this.dispatcher.on('error', err => {
+          console.log(err)
+        })
 			} catch (error) {
 				console.error(error);
 				await this.shift();

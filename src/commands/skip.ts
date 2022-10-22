@@ -15,8 +15,6 @@ export const skip = {
       const player = Player.getPlayer(msg.guild, bot);
       player.dispatcher?.stop();
       
-      await player.shift();
-
       msg.channel.send('Skippado parsa')
     } catch (err) {
       console.error(err);

@@ -72,7 +72,6 @@ export default class Player extends Queue {
         this.connection.subscribe(this.dispatcher);
 
 				this.dispatcher.on(AudioPlayerStatus.Idle, async () => {
-          this.dispatcher?.stop();
 					await this.shift();
 					resolve(true);
 				});

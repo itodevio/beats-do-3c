@@ -13,8 +13,8 @@ export const clear = {
       }
       
       const player = Player.getPlayer(msg.guild, bot);
-      player.dispatcher?.stop();
       await player.clear();
+      player.dispatcher?.stop();
 
       await msg.channel.send('Vizão')
     } catch (err) {

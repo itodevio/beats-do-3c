@@ -17,8 +17,9 @@ export const play = {
       const channel = msg.member!.voice.channel!;
       player.join(bot, channel);
 
-      if (!playing) {
-        msg.channel.send(`Se liga nesse beat cuzão: ${video.videoDetails.title}`)
+      msg.channel.send(`Se liga nesse beat cuzão: ${video.videoDetails.title}`)
+
+      if (!playing || playing !== 'playing') {
         while (await player.stream());
         msg.channel.send(`To marchando família, cabo as track`)
         player.connection?.disconnect();

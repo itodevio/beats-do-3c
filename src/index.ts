@@ -21,7 +21,7 @@ redis.connect()
     });
 
     bot.singleton = new Singleton();
-    
+
     bot.on('ready', () => onBotReady(bot as Bot));
     bot.on('messageCreate', msg => onMessage(bot as Bot, msg));
     

@@ -88,7 +88,7 @@ export default class Queue {
 
 	list = async () => {
 		const redisLength = await this.length()
-		const result = await redis.lRange(this.queueId, 1, redisLength);
+		const result = await redis.lRange(this.queueId, 0, redisLength);
 
 		return result;
 	}

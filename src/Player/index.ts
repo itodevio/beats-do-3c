@@ -8,7 +8,7 @@ import {
   AudioPlayer
 } from '@discordjs/voice';
 import redis from '../config/redis';
-import ytdl from 'ytdl-core-discord';
+import ytdl from 'ytdl-core';
 import Queue from './Queue';
 import { Bot } from '../utils';
 import internal from 'stream';
@@ -72,7 +72,9 @@ export default class Player extends Queue {
 					resolve(true);
 				});
 
-        this.dispatcher.on('error', err => console.log(err))
+        this.dispatcher.on('error', err => {
+          console.log(JSON.stringify(err.message))
+        })
 			} catch (error) {
 				console.error(error);
 				await this.shift();

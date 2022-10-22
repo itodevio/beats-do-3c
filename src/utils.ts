@@ -1,5 +1,5 @@
 import { youtube, youtube_v3 } from '@googleapis/youtube';
-import ytdl from 'ytdl-core-discord';
+import ytdl from 'ytdl-core';
 import { Client, Message } from 'discord.js'
 import CommandProcessor from './commands/CommandProcessor';
 import commands from './commands';
@@ -13,7 +13,7 @@ export const onBotReady = (bot: Bot) => {
 }
 
 export const onMessage = (bot: Bot, msg: Message) => {
-  if (!msg.content.startsWith('!')) return;
+  if (!msg.content.trim().startsWith('!')) return;
 
   const command = new CommandProcessor(msg);
   

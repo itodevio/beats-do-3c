@@ -1,5 +1,5 @@
 import { Guild } from 'discord.js';
-import ytdl from 'ytdl-core-discord';
+import ytdl from 'ytdl-core';
 import redis from "../config/redis";
 import { findYtUrl, getVideoDetails } from '../utils';
 

@@ -2,6 +2,7 @@ import { Message } from 'discord.js';
 import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 import { play } from './play';
+import { list } from './list';
 
 interface Command {
   [key: string]: {
@@ -13,4 +14,5 @@ interface Command {
 export default {
   play,
   p: play,
+  list,
 } as Command;

@@ -1,10 +1,11 @@
+import { AudioPlayerStatus } from '@discordjs/voice';
 import { Message } from 'discord.js';
 import Player from '../Player';
 import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
-export const play = {
-  description: '!play (ou !p) <url do youtube/pesquisa no youtube> -> adiciona um vídeo do youtube na playlist',
+export const clear = {
+  description: '!clear (ou !c) -> limpa a playlist',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {
       if (!msg.guild) {
@@ -12,14 +13,11 @@ export const play = {
       }
       
       const player = Player.getPlayer(msg.guild, bot);
-      const video = await player.add(command.cmdArgs.join(' '));
-      const playing = player.status
-      const channel = msg.member!.voice.channel!;
-      player.join(bot, channel);
+      player.dispatcher?.stop();
+      
+      await player.clear();
 
-      if (!playing) {
-        while (await player.stream());
-      }
+      await msg.channel.send('Vizão')
     } catch (err) {
       console.error(err);
     }

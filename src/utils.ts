@@ -1,5 +1,5 @@
 import { youtube, youtube_v3 } from '@googleapis/youtube';
-import ytdl from 'ytdl-core';
+import ytdl from 'ytdl-core-discord';
 import { Client, Message } from 'discord.js'
 import CommandProcessor from './commands/CommandProcessor';
 import commands from './commands';

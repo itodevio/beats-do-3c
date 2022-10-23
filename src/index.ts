@@ -3,7 +3,6 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import { Bot, onBotReady, onMessage } from './utils';
 import redis from './config/redis';
 import Singleton from './singleton';
-import keepAlive from './server';
 
 const {
   DISCORD_TOKEN,
@@ -26,7 +25,6 @@ redis.connect()
     bot.on('ready', () => onBotReady(bot as Bot));
     bot.on('messageCreate', msg => onMessage(bot as Bot, msg));
     
-    keepAlive();
     bot.login(DISCORD_TOKEN);
   })
 

@@ -5,7 +5,8 @@ import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
 export const skip = {
-  description: '!skip (ou !s) -> pula o vídeo atual',
+  id: 'skip',
+  description: 'Pula o vídeo atual',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {
       if (!msg.guild) {

@@ -4,7 +4,8 @@ import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
 export const play = {
-  description: '!play (ou !p) <url do youtube/pesquisa no youtube> -> adiciona um vídeo do youtube na playlist',
+  id: 'play',
+  description: 'Adiciona um vídeo do youtube na playlist por busca ou pelo link',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {
       if (!msg.guild) {

@@ -5,7 +5,8 @@ import { Bot } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
 export const clear = {
-  description: '!clear (ou !c) -> limpa a playlist',
+  id: 'clear',
+  description: 'Limpa a playlist',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {
       if (!msg.guild) {

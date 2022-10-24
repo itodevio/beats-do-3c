@@ -4,7 +4,8 @@ import { Bot, getVideoDetails } from '../utils';
 import CommandProcessor from './CommandProcessor';
 
 export const playlist = {
-  description: '!list -> retorna a listagem de músicas na queue',
+  id: 'playlist',
+  description: 'Retorna a listagem de músicas na queue',
   action: async (bot: Bot, msg: Message, command: CommandProcessor) => {
     try {
       if (!msg.guild) {

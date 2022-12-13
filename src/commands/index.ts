@@ -5,6 +5,7 @@ import { play } from './play';
 import { playlist } from './playlist';
 import { clear } from './clear';
 import { skip } from './skip';
+import { commands } from './commandsList';
 
 interface Command {
   [key: string]: {
@@ -13,7 +14,7 @@ interface Command {
   }
 }
 
-export default {
+const commandsList = {
   play,
   p: play,
   playlist,
@@ -24,4 +25,7 @@ export default {
   c: clear,
   skip,
   s: skip,
-} as Command;
+  com: commands,
+}
+
+export default commandsList as Command;

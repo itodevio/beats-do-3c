@@ -11,7 +11,7 @@ const {
 
 
 redis.connect()
-  .then(() => {
+  .then(async () => {
     const bot: Client & { singleton?: Singleton } = new Client({
       intents: [
         GatewayIntentBits.Guilds,
@@ -24,9 +24,18 @@ redis.connect()
     bot.singleton = new Singleton();
 
     bot.on('ready', () => onBotReady(bot as Bot));
+    bot.on('error', (err) => console.log(err))
     bot.on('messageCreate', msg => onMessage(bot as Bot, msg));
-    
+
+    console.log('vamo familia')
+    console.log(DISCORD_TOKEN)
+    try {
+
+      await bot.login(DISCORD_TOKEN);
+    } catch (err) {
+      console.log(err)
+    }
     keepAlive();
-    bot.login(DISCORD_TOKEN);
   })
+  .catch(err => console.log(err))
 

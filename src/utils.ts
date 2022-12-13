@@ -6,7 +6,7 @@ import commands from './commands';
 import redis from './config/redis';
 import Singleton from './singleton';
 
-export type Bot = Client & { singleton: Singleton }; 
+export type Bot = Client & { singleton: Singleton };
 
 export const onBotReady = (bot: Bot) => {
   console.log('To on')
@@ -16,7 +16,7 @@ export const onMessage = (bot: Bot, msg: Message) => {
   if (!msg.content.trim().startsWith('!')) return;
 
   const command = new CommandProcessor(msg);
-  
+
   if (Object.keys(commands).includes(command.cmd)) {
     commands[command.cmd].action(bot, msg, command);
   }
@@ -28,20 +28,20 @@ export const findYtUrl = (search: string, maxResults = 1): Promise<string[]> => 
       version: 'v3',
       auth: process.env.YOUTUBE_API_TOKEN
     })
-  
+
     const params: youtube_v3.Params$Resource$Search$List = {
       part: ['id'],
       maxResults,
       type: ['video'],
       q: search
     };
-  
+
     yt.search.list(params, (err, data) => {
       if (err) {
         console.error(err);
         reject(err);
       }
-  
+
       if (!err && data) {
         resolve(data.data.items!.map(({ id }) => `https://www.youtube.com/watch?v=${id?.videoId}`))
       }
@@ -59,7 +59,7 @@ export const getVideoDetails = async (url: string) => {
       return JSON.parse(fromCache);
     }
 
-    const videoDetails = await ytdl.getBasicInfo(url);
+    const { videoDetails } = await ytdl.getBasicInfo(url);
 
     await redis.set(`youtube:${url}`, JSON.stringify(videoDetails));
     await redis.expire(`youtube:${url}`, 86400);

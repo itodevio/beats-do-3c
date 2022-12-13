@@ -1,5 +1,5 @@
 import { Guild, VoiceBasedChannel } from 'discord.js';
-import { 
+import {
   joinVoiceChannel,
   VoiceConnection,
   createAudioPlayer,
@@ -8,7 +8,7 @@ import {
   AudioPlayer
 } from '@discordjs/voice';
 import redis from '../config/redis';
-import ytdl from 'ytdl-core-discord';
+import ytdl from 'ytdl-core';
 import Queue from './Queue';
 import { Bot } from '../utils';
 import internal from 'stream';
@@ -22,9 +22,9 @@ export default class Player extends Queue {
   constructor(guild: Guild) {
     super(guild);
     this.connection = null;
-		this.dispatcher = null;
-		this.bitstream = null;
-		this.volume = 1;
+    this.dispatcher = null;
+    this.bitstream = null;
+    this.volume = 1;
   }
 
   static getPlayer = (guild: Guild, bot: Bot): Player => {
@@ -49,45 +49,47 @@ export default class Player extends Queue {
   stream = () => {
     return new Promise(async (resolve, reject) => {
       try {
-				const { queue } = await this.get(1, 1);
-				const item = queue[0];
+        const { queue } = await this.get(1, 1);
+        const item = queue[0];
 
 
-				if (!item) {
-					resolve(false);
-					return;
-				}
+        if (!item) {
+          resolve(false);
+          return;
+        }
 
-				if (!this.connection) throw TypeError('No connection could be found!');
+        if (!this.connection) throw TypeError('No connection could be found!');
 
-				this.bitstream = await ytdl(item, {
+        console.log({ item })
+
+        this.bitstream = await ytdl(item, {
           filter: 'audioonly',
           highWaterMark: 1 << 25
         });
         this.dispatcher = createAudioPlayer();
 
-        const resource = createAudioResource(this.bitstream);
+        const resource = createAudioResource(this.bitstream as any);
 
         this.dispatcher.play(resource);
         this.connection.subscribe(this.dispatcher);
 
-				this.dispatcher.on(AudioPlayerStatus.Idle, async () => {
-					await this.shift();
-					resolve(true);
-				});
+        this.dispatcher.on(AudioPlayerStatus.Idle, async () => {
+          await this.shift();
+          resolve(true);
+        });
 
         this.dispatcher.on('error', err => {
           console.log(err)
         })
-			} catch (error) {
-				console.error(error);
-				await this.shift();
-				resolve(true);
-			}
+      } catch (error) {
+        console.error(error);
+        await this.shift();
+        resolve(true);
+      }
     })
   }
 
-  get status () {
+  get status() {
     return this.dispatcher?.state.status
   }
 }

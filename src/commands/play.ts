@@ -10,14 +10,15 @@ export const play = {
       if (!msg.guild) {
         return;
       }
-      
+
       const player = Player.getPlayer(msg.guild, bot);
+
       const video = await player.add(command.cmdArgs.join(' '));
       const playing = player.status
       const channel = msg.member!.voice.channel!;
       player.join(bot, channel);
 
-      msg.channel.send(`Se liga nesse beat cuzão: ${video.videoDetails.title}`)
+      msg.channel.send(`Se liga nesse beat cuzão: ${video.title}`)
 
       if (!playing || playing !== 'playing') {
         while (await player.stream());

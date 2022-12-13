@@ -4,6 +4,7 @@ import { Bot, onBotReady, onMessage } from './utils';
 import redis from './config/redis';
 import Singleton from './singleton';
 import keepAlive from './server';
+import { exec } from 'node:child_process';
 
 const {
   DISCORD_TOKEN,
@@ -30,9 +31,9 @@ redis.connect()
     console.log('vamo familia')
     console.log(DISCORD_TOKEN)
     try {
-
       await bot.login(DISCORD_TOKEN);
     } catch (err) {
+      exec("kill 1")
       console.log(err)
     }
     keepAlive();

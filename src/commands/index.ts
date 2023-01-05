@@ -6,6 +6,7 @@ import { playlist } from './playlist';
 import { clear } from './clear';
 import { skip } from './skip';
 import { commands } from './commandsList';
+import { gpt } from './gpt';
 
 interface Command {
   [key: string]: {
@@ -26,6 +27,7 @@ const commandsList = {
   skip,
   s: skip,
   com: commands,
+  gpt,
 }
 
 export default commandsList as Command;

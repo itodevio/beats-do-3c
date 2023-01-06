@@ -23,8 +23,7 @@ export const gpt = {
         return;
       }
 
-        // cade a mensagem ?
-        axios.post(GPT_API_ENDPOINT, {...input, prompt: 'Quem foi o decimo presente do Brasil?'}, {
+        axios.post(GPT_API_ENDPOINT, {...input, prompt: command.cmdArgs.join(' ')}, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${API_KEY}`
